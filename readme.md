@@ -22,7 +22,7 @@ if (window !== window.top) {
 
 ## License
 
-`b24help/app` is licensed under the MIT License
+`types-bitrix24-sdk` is licensed under the MIT License
 
 ## Author
 
