@@ -7,12 +7,28 @@ declare namespace BX24 {
 
 	interface Result {
 		error(): boolean|string
-		data(): Object|Array<string>
+		data(): Array<Object>
 	}
 
-	interface PlacementOptions {
-		ENTITY_ID: string
+	interface ResultObject {
+		error(): boolean|string
+		data(): Object
+	}
+
+	type BatchItem = [
+		string,
+		Object
+	]
+
+	type BatchResult = Result[]
+
+	type PlacementOptions = {
+		ENTITY_ID: string,
 		ENTITY_VALUE_ID: string
+	}
+
+	type PlacementOptionsCard = {
+		ID: number
 	}
 
 	interface PlacementOptionsUserFieldType extends PlacementOptions{
@@ -24,13 +40,29 @@ declare namespace BX24 {
 		XML_ID: string
 	}
 
+	type PlacementSetItem = {
+		DESCRIPTION: string,
+		HANDLER: string,
+		PLACEMENT: string, 
+		TITLE: string
+	}
+
+	type PlacementGetItem = {
+		description: string,
+		handler: string,
+		placement: string, 
+		title: string
+	}
+
+	interface PlacementResult {
+		placement: string
+		options: PlacementOptionsCard|PlacementOptions|PlacementOptionsUserFieldType
+	}
+
 	interface Api { 
 
 		placement: {
-			info(): {
-				placement: string
-				options: PlacementOptions|PlacementOptionsUserFieldType
-			}
+			info(): PlacementResult
 			call(
 				method: string,
 				result: string|string[]|Function
@@ -45,6 +77,12 @@ declare namespace BX24 {
 			callback: Function
 		): void
 		
+		callBatch(
+			calls: Object|Array<BatchItem>,
+			callback: Function,
+			bHaltOnError?: boolean
+		): void
+
 		fitWindow(): void
 		
 		isAdmin(): void
