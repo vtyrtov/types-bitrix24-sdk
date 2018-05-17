@@ -5,6 +5,13 @@
 
 declare namespace BX24 {
 
+	export namespace Entity.CRM {
+		type Deal = {
+			ID: string
+			TITLE: string
+		}
+	}
+
 	interface Result {
 		error(): boolean|string
 		data(): Array<Object>
@@ -59,6 +66,15 @@ declare namespace BX24 {
 		options: PlacementOptionsCard|PlacementOptions|PlacementOptionsUserFieldType
 	}
 
+	type SelectUserResult = {
+		id: string,
+		name: string,
+		sub: boolean,
+		sup: boolean,
+		position: string,
+		photo: string
+	}
+	
 	interface Api { 
 
 		placement: {
@@ -98,6 +114,14 @@ declare namespace BX24 {
 			callback: Function
 		): void
 
+		selectUser(
+			callback: (user: SelectUserResult) => void
+		): void
+
+		selectUsers(
+			callback: (user: SelectUserResult[]) => void
+		): void
+
 		resizeWindow(
 			width: number,
 			height: number,
@@ -105,6 +129,8 @@ declare namespace BX24 {
 		): void
 
 		getScrollSize(): {scrollWidth: number, scrollHeight: number}
+
+		closeApplication(): void
 	}
 
 }
