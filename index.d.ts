@@ -12,13 +12,40 @@ declare namespace BX24 {
 		}
 	}
 
+	interface UserProfile {
+		ADMIN: boolean
+		ID: string
+		LAST_NAME: string
+		NAME: string
+		PERSONAL_GENDER: string
+		PERSONAL_PHOTO: string
+		TIME_ZONE: string
+		TIME_ZONE_OFFSET: number
+	}
+
+	interface ListsParams {
+		FIELDS: object,
+		IBLOCK_CODE: string,
+		IBLOCK_TYPE_ID: string,
+		ELEMENT_ID?: string | number
+		ELEMENT_CODE?: string
+	}
+
 	interface Result {
 		error(): boolean|string
 		data(): Array<Object>
 	}
 
+	interface ResultError {
+		ex: {
+			error: string
+			error_description: string
+		},
+		status: number
+	}
+
 	interface ResultObject {
-		error(): boolean|string
+		error(): undefined|ResultError
 		data(): Object
 	}
 
