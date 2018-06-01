@@ -5,10 +5,32 @@
 
 declare namespace BX24 {
 
+	export namespace Entity.IBlock {
+		type Element = {
+			ID: string
+			NAME: string
+			XML_ID: string
+			CODE: string
+			PREVIEW_TEXT: string
+			DETAIL_TEXT: string
+			DATE_CREATE: string
+			CREATED_BY: string
+		}
+	}
+
 	export namespace Entity.CRM {
+
 		type Deal = {
 			ID: string
 			TITLE: string
+		}
+
+		type Contact = {
+			ID: string
+			NAME: string
+			LAST_NAME: string
+			POST: string
+			COMPANY_ID: string
 		}
 	}
 
@@ -111,7 +133,12 @@ declare namespace BX24 {
 				result: string|string[]|Function
 			): void
 		}
-		
+
+		appOption: {
+			set(name: string, value: string, callback?: Function): void
+			get(name: string): string | undefined
+		}
+
 		init(callback?: Function): void
 
 		callMethod(
@@ -128,7 +155,7 @@ declare namespace BX24 {
 
 		fitWindow(): void
 		
-		isAdmin(): void
+		isAdmin(): boolean
 
 		getDomain(): string
 
