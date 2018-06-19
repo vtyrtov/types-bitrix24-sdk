@@ -19,12 +19,10 @@ declare namespace BX24 {
 	}
 
 	export namespace Entity.CRM {
-
 		type Deal = {
 			ID: string
 			TITLE: string
 		}
-
 		type Contact = {
 			ID: string
 			NAME: string
@@ -79,6 +77,7 @@ declare namespace BX24 {
 	type BatchResult = Result[]
 
 	type PlacementOptions = {
+		ID: string,
 		ENTITY_ID: string,
 		ENTITY_VALUE_ID: string
 	}
