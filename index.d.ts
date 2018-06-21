@@ -184,6 +184,11 @@ declare namespace BX24 {
 		getScrollSize(): {scrollWidth: number, scrollHeight: number}
 
 		closeApplication(): void
+
+		openApplication(
+			params: object,
+			closeCallback?: Function
+		): void
 	}
 
 }
