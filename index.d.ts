@@ -189,6 +189,13 @@ declare namespace BX24 {
 			params: object,
 			closeCallback?: Function
 		): void
+
+		setTitle(
+			title: string,
+			callback?: Function
+		): void
+
+		reloadWindow(): void
 	}
 
 }
