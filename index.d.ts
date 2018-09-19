@@ -129,7 +129,8 @@ declare namespace BX24 {
 			info(): PlacementResult
 			call(
 				method: string,
-				result: string|string[]|Function
+				result: string|string[]|Function,
+				callback?: Function
 			): void
 		}
 
