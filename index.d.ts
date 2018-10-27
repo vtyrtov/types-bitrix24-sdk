@@ -86,13 +86,20 @@ declare namespace BX24 {
 		ID: number
 	}
 
-	interface PlacementOptionsUserFieldType extends PlacementOptions{
+	interface PlacementOptionsUserFieldType extends PlacementOptions {
 		FIELD_NAME: string
 		MANDATORY: string
 		MODE: 'edit'|'view'
 		MULTIPLE: 'Y'|'N'
 		VALUE: string[]|string
 		XML_ID: string
+	}
+
+	type PlacementUserFieldType = {
+		DESCRIPTION: string,
+		HANDLER: string,
+		TITLE: string,
+		USER_TYPE_ID: string
 	}
 
 	type PlacementSetItem = {
@@ -199,6 +206,12 @@ declare namespace BX24 {
 		reloadWindow(): void
 	}
 
+	interface Utils {
+
+	}	
 }
 
-declare interface Window { BX24: BX24.Api }
+declare interface Window { 
+	BX24: BX24.Api
+	BX24Utils: BX24.Utils
+}

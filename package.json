@@ -1,7 +1,7 @@
 {
 	"name": "@types/bitrix24-sdk",
 	"author": "Vladimir Tyrtov",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Type definitions for JS SDK REST API Bitrix24",
 	"scripts": {},
 	"types": "./index.d.ts",
