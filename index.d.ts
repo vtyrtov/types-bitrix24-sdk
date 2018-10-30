@@ -4,9 +4,8 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 declare namespace BX24 {
-
 	export namespace Entity.IBlock {
-		type Element = {
+		interface Element {
 			ID: string
 			NAME: string
 			XML_ID: string
@@ -19,11 +18,11 @@ declare namespace BX24 {
 	}
 
 	export namespace Entity.CRM {
-		type Deal = {
+		interface Deal {
 			ID: string
 			TITLE: string
 		}
-		type Contact = {
+		interface Contact {
 			ID: string
 			NAME: string
 			LAST_NAME: string
@@ -44,101 +43,93 @@ declare namespace BX24 {
 	}
 
 	interface ListsParams {
-		FIELDS: object,
-		IBLOCK_CODE: string,
-		IBLOCK_TYPE_ID: string,
+		FIELDS: object
+		IBLOCK_CODE: string
+		IBLOCK_TYPE_ID: string
 		ELEMENT_ID?: string | number
 		ELEMENT_CODE?: string
 	}
 
 	interface Result {
-		error(): boolean|string
-		data(): Array<Object>
+		error(): boolean | string
+		data(): Object[]
 	}
 
 	interface ResultError {
 		ex: {
 			error: string
 			error_description: string
-		},
+		}
 		status: number
 	}
 
 	interface ResultObject {
-		error(): undefined|ResultError
+		error(): undefined | ResultError
 		data(): Object
 	}
 
-	type BatchItem = [
-		string,
-		Object
-	]
+	type BatchItem = [string, Object]
 
 	type BatchResult = Result[]
 
-	type PlacementOptions = {
-		ID: string,
-		ENTITY_ID: string,
+	interface PlacementOptions {
+		ID: string
+		ENTITY_ID: string
 		ENTITY_VALUE_ID: string
 	}
 
-	type PlacementOptionsCard = {
+	interface PlacementOptionsCard {
 		ID: number
 	}
 
 	interface PlacementOptionsUserFieldType extends PlacementOptions {
 		FIELD_NAME: string
 		MANDATORY: string
-		MODE: 'edit'|'view'
-		MULTIPLE: 'Y'|'N'
-		VALUE: string[]|string
+		MODE: 'edit' | 'view'
+		MULTIPLE: 'Y' | 'N'
+		VALUE: string[] | string
 		XML_ID: string
 	}
 
-	type PlacementUserFieldType = {
-		DESCRIPTION: string,
-		HANDLER: string,
-		TITLE: string,
+	interface PlacementUserFieldType {
+		DESCRIPTION: string
+		HANDLER: string
+		TITLE: string
 		USER_TYPE_ID: string
 	}
 
-	type PlacementSetItem = {
-		DESCRIPTION: string,
-		HANDLER: string,
-		PLACEMENT: string, 
+	interface PlacementSetItem {
+		DESCRIPTION: string
+		HANDLER: string
+		PLACEMENT: string
 		TITLE: string
 	}
 
-	type PlacementGetItem = {
-		description: string,
-		handler: string,
-		placement: string, 
+	interface PlacementGetItem {
+		description: string
+		handler: string
+		placement: string
 		title: string
 	}
 
 	interface PlacementResult {
 		placement: string
-		options: PlacementOptionsCard|PlacementOptions|PlacementOptionsUserFieldType
+		options: PlacementOptionsCard | PlacementOptions | PlacementOptionsUserFieldType
 	}
 
-	type SelectUserResult = {
-		id: string,
-		name: string,
-		sub: boolean,
-		sup: boolean,
-		position: string,
+	interface SelectUserResult {
+		id: string
+		name: string
+		sub: boolean
+		sup: boolean
+		position: string
 		photo: string
 	}
-	
-	interface Api { 
 
+	interface Api {
 		placement: {
 			info(): PlacementResult
-			call(
-				method: string,
-				result: string|string[]|Function,
-				callback?: Function
-			): void
+			call(method: string, result: string | string[] | Function, callback?: Function): void
 		}
 
 		appOption: {
@@ -148,70 +139,46 @@ declare namespace BX24 {
 
 		init(callback?: Function): void
 
-		callMethod(
-			method: string,
-			params: Object,
-			callback: Function
-		): void
-		
-		callBatch(
-			calls: Object|Array<BatchItem>,
-			callback: Function,
-			bHaltOnError?: boolean
-		): void
+		callMethod(method: string, params: Object, callback: Function): void
+
+		callBatch(calls: Object | BatchItem[], callback: Function, bHaltOnError?: boolean): void
 
 		fitWindow(): void
-		
+
 		isAdmin(): boolean
 
 		getDomain(): string
 
 		selectCRM(
 			params: {
-				entityType: string[],
-				multiple: Boolean,
+				entityType: string[]
+				multiple: Boolean
 				value?: Object
 			},
 			callback: Function
 		): void
 
-		selectUser(
-			callback: (user: SelectUserResult) => void
-		): void
+		selectUser(callback: (user: SelectUserResult) => void): void
 
-		selectUsers(
-			callback: (user: SelectUserResult[]) => void
-		): void
+		selectUsers(callback: (user: SelectUserResult[]) => void): void
 
-		resizeWindow(
-			width: number,
-			height: number,
-			callback?: Function
-		): void
+		resizeWindow(width: number, height: number, callback?: Function): void
 
-		getScrollSize(): {scrollWidth: number, scrollHeight: number}
+		getScrollSize(): { scrollWidth: number; scrollHeight: number }
 
 		closeApplication(): void
 
-		openApplication(
-			params: object,
-			closeCallback?: Function
-		): void
+		openApplication(params: object, closeCallback?: Function): void
 
-		setTitle(
-			title: string,
-			callback?: Function
-		): void
+		setTitle(title: string, callback?: Function): void
 
 		reloadWindow(): void
 	}
 
-	interface Utils {
-
-	}	
+	interface Utils {}
 }
 
-declare interface Window { 
+declare interface Window {
 	BX24: BX24.Api
 	BX24Utils: BX24.Utils
 }
