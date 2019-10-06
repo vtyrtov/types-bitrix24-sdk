@@ -152,6 +152,8 @@ declare namespace BX24 {
 
         getDomain(): string;
 
+        getLang(): string;
+
         selectCRM(
             params: {
                 entityType: string[];
@@ -178,7 +180,7 @@ declare namespace BX24 {
         reloadWindow(): void;
     }
 
-    interface Utils {}
+    interface Utils { }
 }
 
 declare interface Window {
