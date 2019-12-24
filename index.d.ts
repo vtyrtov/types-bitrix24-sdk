@@ -6,184 +6,194 @@
 declare namespace BX24 {
     export namespace Entity.IBlock {
         interface Element {
-            ID: string;
-            NAME: string;
-            XML_ID: string;
-            CODE: string;
-            PREVIEW_TEXT: string;
-            DETAIL_TEXT: string;
-            DATE_CREATE: string;
-            CREATED_BY: string;
+            ID: string
+            NAME: string
+            XML_ID: string
+            CODE: string
+            PREVIEW_TEXT: string
+            DETAIL_TEXT: string
+            DATE_CREATE: string
+            CREATED_BY: string
         }
     }
 
     export namespace Entity.CRM {
         interface Deal {
-            ID: string;
-            TITLE: string;
+            ID: string
+            TITLE: string
+            STAGE_ID: string
+            CATEGORY_ID: string
+            COMPANY_ID: string
+            ASSIGNED_BY_ID: string
         }
         interface Contact {
-            ID: string;
-            NAME: string;
-            LAST_NAME: string;
-            POST: string;
-            COMPANY_ID: string;
+            ID: string
+            NAME: string
+            LAST_NAME: string
+            POST: string
+            COMPANY_ID: string
+            ASSIGNED_BY_ID: string
+        }
+        interface Company {
+            ID: string
+            TITLE: string
+            ASSIGNED_BY_ID: string
         }
     }
 
     interface UserProfile {
-        ADMIN: boolean;
-        ID: string;
-        LAST_NAME: string;
-        NAME: string;
-        PERSONAL_GENDER: string;
-        PERSONAL_PHOTO: string;
-        TIME_ZONE: string;
-        TIME_ZONE_OFFSET: number;
+        ADMIN: boolean
+        ID: string
+        LAST_NAME: string
+        NAME: string
+        PERSONAL_GENDER: string
+        PERSONAL_PHOTO: string
+        TIME_ZONE: string
+        TIME_ZONE_OFFSET: number
     }
 
     interface ListsParams {
-        FIELDS: object;
-        IBLOCK_CODE: string;
-        IBLOCK_TYPE_ID: string;
-        ELEMENT_ID?: string | number;
-        ELEMENT_CODE?: string;
+        FIELDS: object
+        IBLOCK_CODE: string
+        IBLOCK_TYPE_ID: string
+        ELEMENT_ID?: string | number
+        ELEMENT_CODE?: string
     }
 
     interface Result {
-        error(): boolean | string;
-        data(): Object[];
-        more(): boolean;
-        next(): boolean;
-        total(): number;
+        error(): boolean | string
+        data(): Object[]
+        more(): boolean
+        next(): boolean
+        total(): number
     }
 
     interface ResultError {
         ex: {
-            error: string;
-            error_description: string;
-        };
-        status: number;
+            error: string
+            error_description: string
+        }
+        status: number
     }
 
     interface ResultObject {
-        error(): undefined | ResultError;
-        data(): Object;
+        error(): undefined | ResultError
+        data(): Object
     }
 
-    type BatchItem = [string, Object];
+    type BatchItem = [string, Object]
 
-    type BatchResult = Result[];
+    type BatchResult = Result[]
 
     interface PlacementOptions {
-        ID: string;
-        ENTITY_ID: string;
-        ENTITY_VALUE_ID: string;
+        ID: string
+        ENTITY_ID: string
+        ENTITY_VALUE_ID: string
     }
 
     interface PlacementOptionsCard {
-        ID: number;
+        ID: number
     }
 
     interface PlacementOptionsUserFieldType extends PlacementOptions {
-        FIELD_NAME: string;
-        MANDATORY: string;
-        MODE: "edit" | "view";
-        MULTIPLE: "Y" | "N";
-        VALUE: string[] | string;
-        XML_ID: string;
+        FIELD_NAME: string
+        MANDATORY: string
+        MODE: "edit" | "view"
+        MULTIPLE: "Y" | "N"
+        VALUE: string[] | string
+        XML_ID: string
     }
 
     interface PlacementUserFieldType {
-        DESCRIPTION: string;
-        HANDLER: string;
-        TITLE: string;
-        USER_TYPE_ID: string;
+        DESCRIPTION: string
+        HANDLER: string
+        TITLE: string
+        USER_TYPE_ID: string
     }
 
     interface PlacementSetItem {
-        DESCRIPTION: string;
-        HANDLER: string;
-        PLACEMENT: string;
-        TITLE: string;
+        DESCRIPTION: string
+        HANDLER: string
+        PLACEMENT: string
+        TITLE: string
     }
 
     interface PlacementGetItem {
-        description: string;
-        handler: string;
-        placement: string;
-        title: string;
+        description: string
+        handler: string
+        placement: string
+        title: string
     }
 
     interface PlacementResult {
-        placement: string;
-        options: PlacementOptionsCard | PlacementOptions | PlacementOptionsUserFieldType;
+        placement: string
+        options: PlacementOptionsCard | PlacementOptions | PlacementOptionsUserFieldType
     }
 
     interface SelectUserResult {
-        id: string;
-        name: string;
-        sub: boolean;
-        sup: boolean;
-        position: string;
-        photo: string;
+        id: string
+        name: string
+        sub: boolean
+        sup: boolean
+        position: string
+        photo: string
     }
 
     interface Api {
         placement: {
-            info(): PlacementResult;
-            call(method: string, result: string | string[] | Function, callback?: Function): void;
-        };
+            info(): PlacementResult
+            call(method: string, result: string | string[] | Function, callback?: Function): void
+        }
 
         appOption: {
-            set(name: string, value: string, callback?: Function): void;
-            get(name: string): string | undefined;
-        };
+            set(name: string, value: string, callback?: Function): void
+            get(name: string): string | undefined
+        }
 
-        init(callback?: Function): void;
+        init(callback?: Function): void
 
-        callMethod(method: string, params: Object, callback: Function): void;
+        callMethod(method: string, params: Object, callback: Function): void
 
-        callBatch(calls: Object | BatchItem[], callback: Function, bHaltOnError?: boolean): void;
+        callBatch(calls: Object | BatchItem[], callback: Function, bHaltOnError?: boolean): void
 
-        fitWindow(): void;
+        fitWindow(): void
 
-        isAdmin(): boolean;
+        isAdmin(): boolean
 
-        getDomain(): string;
+        getDomain(): string
 
-        getLang(): string;
+        getLang(): string
 
         selectCRM(
             params: {
-                entityType: string[];
-                multiple: Boolean;
-                value?: Object;
+                entityType: string[]
+                multiple: Boolean
+                value?: Object
             },
             callback: Function
-        ): void;
+        ): void
 
-        selectUser(callback: (user: SelectUserResult) => void): void;
+        selectUser(callback: (user: SelectUserResult) => void): void
 
-        selectUsers(callback: (user: SelectUserResult[]) => void): void;
+        selectUsers(callback: (user: SelectUserResult[]) => void): void
 
-        resizeWindow(width: number, height: number, callback?: Function): void;
+        resizeWindow(width: number, height: number, callback?: Function): void
 
-        getScrollSize(): { scrollWidth: number; scrollHeight: number };
+        getScrollSize(): { scrollWidth: number; scrollHeight: number }
 
-        closeApplication(): void;
+        closeApplication(): void
 
-        openApplication(params: object, closeCallback?: Function): void;
+        openApplication(params: object, closeCallback?: Function): void
 
-        setTitle(title: string, callback?: Function): void;
+        setTitle(title: string, callback?: Function): void
 
-        reloadWindow(): void;
+        reloadWindow(): void
     }
 
     interface Utils { }
 }
 
 declare interface Window {
-    BX24: BX24.Api;
-    BX24Utils: BX24.Utils;
+    BX24: BX24.Api
+    BX24Utils: BX24.Utils
 }
