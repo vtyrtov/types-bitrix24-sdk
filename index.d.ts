@@ -18,6 +18,12 @@ declare namespace BX24 {
     }
 
     export namespace Entity.CRM {
+        interface FM {
+            ID?: string
+            VALUE_TYPE: string
+            VALUE: string
+            TYPE_ID?: string
+        }
         interface Deal {
             ID: string
             TITLE: string
@@ -28,11 +34,16 @@ declare namespace BX24 {
         }
         interface Contact {
             ID: string
-            NAME: string
             LAST_NAME: string
+            NAME: string
+            SECOND_NAME: string
             POST: string
             COMPANY_ID: string
             ASSIGNED_BY_ID: string
+            HAS_PHONE: string
+            HAS_EMAIL: string
+            PHONE: Array<FM>
+            EMAIL: Array<FM>
         }
         interface Company {
             ID: string
@@ -167,7 +178,7 @@ declare namespace BX24 {
         selectCRM(
             params: {
                 entityType: string[]
-                multiple: Boolean
+                multiple?: Boolean
                 value?: Object
             },
             callback: Function
