@@ -26,7 +26,7 @@ if (window !== window.top) {
 
 ## Author
 
-Vladimir Tyrtov - [info@b24.help](mailto:info@b24.help) - https://www.b24.help
+Vladimir Tyrtov - [info@b24.help](mailto:info@b24.help)
 
 ## Need custom Bitrix24 application?
 
